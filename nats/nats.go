@@ -14,7 +14,7 @@ type natsServer struct {
 func (s *natsServer) connect() error {
 	s.client = &http.Client{}
 
-	sc, err := stan.Connect("test-cluster", "subscriber", stan.NatsURL("nats://localhost:4222"))
+	_, err := stan.Connect("test-cluster", "subscriber", stan.NatsURL("nats://localhost:4222"))
 	if err != nil {
 		return err
 	}
