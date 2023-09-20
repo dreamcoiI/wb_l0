@@ -25,12 +25,14 @@ func (s *Storage) MigrateStorage() ([]model.Order, error) {
 	var err error
 
 	for _, m := range models {
+
 		option := orm.CreateTableOptions{IfNotExists: true}
 		err = s.db.Model(m).CreateTable(&option)
 		if err != nil {
 			log.Fatalln(err)
 			return nil, err
 		}
+
 	}
 
 	orders := make([]model.Order, 0)

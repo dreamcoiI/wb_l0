@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/nats-io/stan.go"
-	"io/ioutil"
+	"os"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 
 	}
 
-	b, err := ioutil.ReadFile("model.json")
+	b, err := os.ReadFile("model.json")
 
 	if err != nil {
 		fmt.Println("cant open file")
@@ -27,5 +27,8 @@ func main() {
 		fmt.Println(err.Error())
 	}
 
-	sc.Close()
+	err = sc.Close()
+	if err != nil {
+		return
+	}
 }

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS orders (
                                       track_number TEXT NOT NULL,
                                       entry TEXT NOT NULL,
                                       locale TEXT NOT NULL,
-                                      internal_sigrnature TEXT,
+                                      internal_signature TEXT,
                                       customer_id TEXT NOT NULL,
                                       delivery_service TEXT NOT NULL,
                                       shardkey TEXT NOT NULL,

@@ -24,6 +24,7 @@ func main() {
 	server := app.NewServer(config, logger)
 
 	go func() {
+
 		oscall := <-c
 
 		logger.Info().Msg(fmt.Sprintf("system call:%+v", oscall))

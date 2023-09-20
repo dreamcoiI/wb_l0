@@ -38,13 +38,13 @@ func (server *appServer) Serve(ctx context.Context) error {
 	defer func(dbPool *pg.DB) {
 		err := dbPool.Close()
 		if err != nil {
-
 		}
 	}(dbPool)
 	server.db = dbPool
 	orderStorage := storage.NewStorage(dbPool)
 
 	orders, err := orderStorage.MigrateStorage()
+
 	if err != nil {
 		return err
 	}

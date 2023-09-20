@@ -46,7 +46,7 @@ func LoadConfigFromEnv() Config {
 	config.DBPass = getEnvOrDefault("DBPASS", "wb")
 	config.DBHost = getEnvOrDefault("DBHOST", "localhost")
 	config.DBPort = getEnvOrDefaultInt("DBPORT", 5434)
-	config.DBName = getEnvOrDefault("DBNAME", "wb")
+	config.DBName = getEnvOrDefault("DBNAME", "wb_l0")
 
 	return config
 }
