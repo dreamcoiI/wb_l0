@@ -3,7 +3,6 @@ package config
 import (
 	"fmt"
 	"github.com/go-pg/pg"
-	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 )
@@ -38,11 +37,7 @@ func getEnvOrDefaultInt(key string, defaultValue int) int {
 	return valueInt
 }
 
-func LoadConfigFromEnv(envFilePath string) Config {
-	err := godotenv.Load(envFilePath)
-	if err != nil {
-		fmt.Println("Error loading end file")
-	}
+func LoadConfigFromEnv() Config {
 
 	var config Config
 

@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"github.com/sirupsen/logrus"
 	"main/internal/model"
 	"main/internal/storage"
@@ -36,7 +37,8 @@ func (s *OrderService) CreateOrder(newOrder model.Order) error {
 
 func (s *OrderService) GetOrder(orderUID string) (model.Order, error) {
 	res, err := s.cache[orderUID]
-	if err {
+	fmt.Println(s)
+	if !err {
 		return res, errors.New("can't find UID on cache")
 	}
 

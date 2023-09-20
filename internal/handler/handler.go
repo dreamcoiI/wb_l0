@@ -2,7 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/gorilla/mux"
+	"main/internal/model"
 	"main/internal/service"
 	"net/http"
 )
@@ -18,25 +21,48 @@ func NewHandler(service *service.OrderService) *Handler {
 }
 
 func (h *Handler) GetOrder(w http.ResponseWriter, r *http.Request) {
-	var orderUID struct {
-		OrderUID string `json:"order_uid"`
+	vars := mux.Vars(r)
+
+	if vars["order_uid"] == "" {
+		WrapError(w, errors.New("missing id"))
+		return
 	}
 
-	err := json.NewDecoder(r.Body).Decode(&orderUID)
+	order, err := h.service.GetOrder(vars["order_uid"])
+	if err != nil {
+		WrapError(w, err)
+		return
+	}
+
+	var m = map[string]interface{}{
+		"result": "OK",
+		"data":   order,
+	}
+
+	WrapOK(w, m)
+}
+
+func (h *Handler) NewOrder(w http.ResponseWriter, r *http.Request) {
+
+	var newOrder model.Order
+
+	err := json.NewDecoder(r.Body).Decode(&newOrder)
 
 	if err != nil {
 		WrapError(w, err)
 		return
 	}
 
-	order, err := h.service.GetOrder(orderUID.OrderUID)
+	err = h.service.CreateOrder(newOrder)
+
 	if err != nil {
 		WrapError(w, err)
+		return
 	}
 
 	var m = map[string]interface{}{
 		"result": "OK",
-		"data":   order,
+		"data":   "",
 	}
 
 	WrapOK(w, m)

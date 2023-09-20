@@ -1,6 +1,15 @@
-
 version: "3.9"
 services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: "wb"
+      POSTGRES_USER: "wb"
+      POSTGRES_PASSWORD: "wb"
+
+    ports:
+      - "5434:5434"
+
   nats-streaming:
     # command:
     # - nats-streaming
@@ -8,3 +17,4 @@ services:
     container_name: nats-streaming
     ports:
       - 4222:4222
+ 

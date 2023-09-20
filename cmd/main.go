@@ -13,8 +13,7 @@ import (
 func main() {
 	logger := new(zerolog.Logger)
 
-	envFilePath := "config.env"
-	config := config2.LoadConfigFromEnv(envFilePath)
+	config := config2.LoadConfigFromEnv()
 
 	ctx, cancel := context.WithCancel(context.Background())
 
