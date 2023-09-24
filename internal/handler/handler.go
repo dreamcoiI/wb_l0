@@ -34,12 +34,25 @@ func (h *Handler) GetOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var m = map[string]interface{}{
+	var response = map[string]interface{}{
 		"result": "OK",
 		"data":   order,
 	}
 
-	WrapOK(w, m)
+	resp, err := json.Marshal(response)
+	if err != nil {
+		WrapError(w, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, err = w.Write(resp)
+	if err != nil {
+		WrapError(w, err)
+		return
+	}
+
+	WrapOK(w, response)
 }
 
 func (h *Handler) NewOrder(w http.ResponseWriter, r *http.Request) {
@@ -60,12 +73,25 @@ func (h *Handler) NewOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var m = map[string]interface{}{
+	var response = map[string]interface{}{
 		"result": "OK",
 		"data":   "",
 	}
 
-	WrapOK(w, m)
+	resp, err := json.Marshal(response)
+	if err != nil {
+		WrapError(w, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, err = w.Write(resp)
+	if err != nil {
+		WrapError(w, err)
+		return
+	}
+
+	WrapOK(w, response)
 }
 
 func WrapOK(w http.ResponseWriter, m map[string]interface{}) {

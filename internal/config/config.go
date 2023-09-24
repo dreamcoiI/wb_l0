@@ -58,5 +58,4 @@ func (cfg *Config) GetDBString() pg.Options {
 		Database: cfg.DBName,
 		Addr:     "localhost:5434",
 	}
-	// return fmt.Sprintf("postgres://%s:%s@%s:%s/%s", cfg.DbUser, cfg.DbPass, cfg.DbHost, cfg.DbPort, cfg.DbName)
 }
